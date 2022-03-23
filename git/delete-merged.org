@@ -1,0 +1,18 @@
+#+TITLE:  Delete Merged branches
+#+AUTHOR: Sharad Gudihal
+#+EMAIL:  sharuu.d@gmail
+#+DATE:   [2013-12-06 Fri]
+#+TAGS:   git
+
+
+* Delete merged branches
+
+  
+
+  #+BEGIN_SRC shell
+    delete_merged_branches() {
+       DEFAULT_REMOTE=`git config --default origin --get clone.defaultRemoteName`
+       DEFAULT_BRANCH=`git remote show $DEFAULT_REMOTE  | sed -n '/HEAD branch/s/.*: //p'`
+       git branch --merged $DEFAULT_BRANCH | grep -v "^\* $DEFAULT_BRANCH" | xargs -n 1 -r git branch -d
+    }
+  #+END_SRC
