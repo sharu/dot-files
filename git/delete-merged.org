@@ -16,3 +16,17 @@
        git branch --merged $DEFAULT_BRANCH | grep -v "^\* $DEFAULT_BRANCH" | xargs -n 1 -r git branch -d
     }
   #+END_SRC
+
+* List remote sources by commit date
+
+#+BEGIN_SRC shell
+    list_remote_branches() {
+      git for-each-ref --sort=committerdate refs/remotes/origin --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+     }
+ #+END_SRC
+
+ * List merged branches in remote main
+
+#+BEGIN_SRC shell
+    git branch --merged main -r                                                         
+#+END_SRC                                                                                             
